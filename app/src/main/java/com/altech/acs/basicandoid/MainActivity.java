@@ -2,6 +2,7 @@ package com.altech.acs.basicandoid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +37,21 @@ public class MainActivity extends Activity implements IMenuHandler
 
         Intent enterAmountIntent = new Intent(this, EnterAmountActivity.class);
         enterAmountIntent.putExtra("MyData", "42.00");
-        startActivity(enterAmountIntent);
+        startActivityForResult(enterAmountIntent, 0);
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Retrieve data in the intent
+        String editTextValue = data.getStringExtra("EnteredAmount");
+
+        Toast.makeText(getBaseContext(), "The value returned from the activity is " + editTextValue, Toast.LENGTH_LONG).show();
+    }
+
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
