@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Altech Android Terminal POC</string>
+    <string name="title_activity_enter_pin">Enter PIN</string>
 </resources>

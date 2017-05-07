@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.altech.acs.basicandoid.EnterAmountActivity">
+    tools:context="com.altech.acs.basicandoid.EnterPINActivity">
 
     <LinearLayout
         android:id="@+id/parent_layout"
@@ -18,33 +18,36 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
 
-    <LinearLayout
-        android:id="@+id/layout_row0"
-        android:layout_width="368dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="20pt"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/layout_row0"
+            android:layout_width="368dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20pt"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
-            <TextView
-                android:id="@+id/AmountPromptText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please enter the amount"
-                android:textAlignment="center"/>
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/AmountEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                <TextView
+                    android:id="@+id/PINPromptText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please enter your PIN"
+                    android:textAlignment="center"/>
+
+
+
+                <EditText
+                    android:id="@+id/PINEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    />
 
             </LinearLayout>
 
@@ -195,15 +198,6 @@
                 android:layout_gravity="center_vertical"
                 android:text="0" />
 
-            <Button
-                android:id="@+id/buttonDot"
-                style="?android:attr/buttonStyleSmall"
-                android:clickable="false"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:text="." />
 
             <Button
                 android:id="@+id/buttonClear"
