@@ -81,7 +81,7 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
     boolean ACS_ShowWaitingScreen(String strPrompt)
     {
         Intent waitingIntent = new Intent(this, WaitingActivity.class);
-        //waitingIntent.putExtra(WaitingActivity_InputPrompt, strPrompt);
+        waitingIntent.putExtra(WaitingActivity_InputPrompt, strPrompt);
         startActivity(waitingIntent);
         return true;
     }
@@ -155,7 +155,7 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
                 String editTextValue = data.getStringExtra("EnteredPIN");
                 Toast.makeText(getBaseContext(), "The entered PIN is " + editTextValue, Toast.LENGTH_LONG).show();
 
-                ACS_ShowWaitingScreen("");
+                ACS_ShowWaitingScreen(stringFromJNI());
                 //Thread.sleep(2000);
 
                 new CountDownTimer(3000, 1000) {
