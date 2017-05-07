@@ -9,6 +9,7 @@ public class IntentExtraDataIdentifiers
     public static String EnterAmountActivity_InputPrompt = "InputPrompt";
     public static String EnterAmountActivity_InputAmount = "InputAmount";
     public static String EnterPINActivity_InputPrompt    = "InputPrompt";
+    public static String WaitingActivity_InputPrompt     = "InputPrompt";
 
     public static String EnterAmountActivity_EnteredAmount = "EnteredAmount";
 

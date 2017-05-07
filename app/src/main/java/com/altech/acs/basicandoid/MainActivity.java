@@ -3,15 +3,18 @@ package com.altech.acs.basicandoid;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterAmountActivity_EnteredAmount;
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterAmountActivity_InputAmount;
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterAmountActivity_InputPrompt;
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterPINActivity_InputPrompt;
+import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.WaitingActivity_InputPrompt;
 
 public class MainActivity extends Activity implements IMenuHandler, IOnActivityCompletedHandler
 {
@@ -55,8 +58,8 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
 
 
 
-    /* The POC 'API' */
-    boolean GetUserInput_Amount(String strPrompt, String strDefaultValue, IOnActivityCompletedHandler resultHandler)
+    /* The POC 'API'. Methods all start with ACS_ for easily finding them using autocomplete. */
+    boolean ACS_GetUserInput_Amount(String strPrompt, String strDefaultValue, IOnActivityCompletedHandler resultHandler)
     {
         Intent enterAmountIntent = new Intent(this, EnterAmountActivity.class);
         m_mapUserHandlerByRequestCode.put(ENTER_AMOUNT_REQUEST_CODE, resultHandler);
@@ -66,12 +69,28 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
         return true;
     }
 
-    boolean GetUserInput_PIN(String strPrompt, IOnActivityCompletedHandler resultHandler)
+    boolean ACS_GetUserInput_PIN(String strPrompt, IOnActivityCompletedHandler resultHandler)
     {
         Intent enterPINIntent = new Intent(this, EnterPINActivity.class);
         m_mapUserHandlerByRequestCode.put(ENTER_PIN_REQUEST_CODE, resultHandler);
         enterPINIntent.putExtra(EnterPINActivity_InputPrompt, strPrompt);
         startActivityForResult(enterPINIntent, ENTER_PIN_REQUEST_CODE);
+        return true;
+    }
+
+    boolean ACS_ShowWaitingScreen(String strPrompt)
+    {
+        Intent waitingIntent = new Intent(this, WaitingActivity.class);
+        //waitingIntent.putExtra(WaitingActivity_InputPrompt, strPrompt);
+        startActivity(waitingIntent);
+        return true;
+    }
+
+    boolean ACS_HideWaitingScreen()
+    {
+        if (WaitingActivity.Instance != null) {
+            WaitingActivity.Instance.finish();
+        }
         return true;
     }
 
@@ -97,10 +116,10 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
 
         if (iItemId == MENU_ITEM_ID_MANUAL_TRANSACTION)
         {
-            GetUserInput_Amount("Please enter amount", "", this);
+            ACS_GetUserInput_Amount("Please enter amount", "", this);
         }else if (iItemId == MENU_ITEM_ID_GET_PIN)
         {
-            GetUserInput_PIN("Please enter PIN", this);
+            ACS_GetUserInput_PIN("Please enter PIN", this);
         }
     }
 
@@ -135,6 +154,21 @@ public class MainActivity extends Activity implements IMenuHandler, IOnActivityC
             case ENTER_PIN_REQUEST_CODE: {
                 String editTextValue = data.getStringExtra("EnteredPIN");
                 Toast.makeText(getBaseContext(), "The entered PIN is " + editTextValue, Toast.LENGTH_LONG).show();
+
+                ACS_ShowWaitingScreen("");
+                //Thread.sleep(2000);
+
+                new CountDownTimer(3000, 1000) {
+                    public void onFinish() {
+                        // When timer is finished
+                        // Execute your code here
+                        ACS_HideWaitingScreen();
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                        // millisUntilFinished    The amount of time until finished.
+                    }
+                }.start();
                 break;
             }
         }

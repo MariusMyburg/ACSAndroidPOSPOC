@@ -19,7 +19,10 @@
         <activity android:name=".EnterAmountActivity" />
         <activity
             android:name=".EnterPINActivity"
-            android:label="@string/title_activity_enter_pin"></activity>
+            android:label="@string/title_activity_enter_pin" />
+        <activity
+            android:name=".WaitingActivity"
+            android:label="@string/title_activity_waiting"></activity>
     </application>
 
 </manifest>
