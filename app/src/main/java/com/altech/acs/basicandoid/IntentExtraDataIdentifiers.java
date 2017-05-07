@@ -6,10 +6,12 @@ package com.altech.acs.basicandoid;
 
 public class IntentExtraDataIdentifiers
 {
-    public static String EnterAmountActivity_InputPrompt = "InputPrompt";
+    private static String COMMON_INPUTPROMPT = "InputPrompt";
+
+    public static String EnterAmountActivity_InputPrompt = COMMON_INPUTPROMPT;
     public static String EnterAmountActivity_InputAmount = "InputAmount";
-    public static String EnterPINActivity_InputPrompt    = "InputPrompt";
-    public static String WaitingActivity_InputPrompt     = "InputPrompt";
+    public static String EnterPINActivity_InputPrompt    = COMMON_INPUTPROMPT;
+    public static String WaitingActivity_InputPrompt     = COMMON_INPUTPROMPT;
 
     public static String EnterAmountActivity_EnteredAmount = "EnteredAmount";
 

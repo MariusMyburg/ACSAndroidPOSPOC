@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterAmountActivity_EnteredAmount;
 import static com.altech.acs.basicandoid.IntentExtraDataIdentifiers.EnterAmountActivity_InputAmount;
